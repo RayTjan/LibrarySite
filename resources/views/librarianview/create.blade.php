@@ -1,4 +1,4 @@
-@extends('products.layout')
+@extends('librarianview.layout')
   
 @section('content')
 <div class="row">
@@ -7,7 +7,7 @@
             <h2>Add New Product</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('librarian.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -39,14 +39,15 @@
                 <input type="text" name="genre" class="form-control" placeholder="Genre">
             </div>
         </div>
+        <label for="year_published">Year Published:</label>
+        <input type="year" id="year_published" name="year_published" placeholder="YYYY">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Author:</strong>
                 <input type="text" name="author" class="form-control" placeholder="Author">
             </div>
         </div>
-        <label for="year_published">Year Published:</label>
-        <input type="year" id="year_published" name="year_published" placeholder="YYYY">
+        
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Synopsis:</strong>

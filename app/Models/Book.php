@@ -12,6 +12,7 @@ class Book extends Model
     protected $fillable = [
         'name',
         'author',
+        'genre',
         'synopsis',
         'year_published',
         'peminjam_id',

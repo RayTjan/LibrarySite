@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
@@ -10,10 +10,9 @@ class LibrarianController extends Controller
 {
     public function index()
     {
-        $books = Book::latest()->paginate(5);
+        $books = Book::all();
   
-        return view('librarian.index',compact('books'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('librarianview.index',compact('books'));
     }
    
     /**
@@ -23,7 +22,7 @@ class LibrarianController extends Controller
      */
     public function create()
     {
-        return view('librarian.create');
+        return view('librarianview.create');
     }
   
     /**
@@ -36,7 +35,7 @@ class LibrarianController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'genre' => 'genre',
+            'genre' => 'required',
             'author' => 'required',
             'synopsis' => 'required',
             'year_published' => 'required',
@@ -51,38 +50,42 @@ class LibrarianController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
     public function show(Book $book)
     {
-        return view('librarian.show',compact('book'));
+        return view('librarianview.show', [
+            'book' => $book
+        ]);
+        // return view('librarianview.show',compact('book'));
+
     }
    
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
     public function edit(Book $book)
     {
-        return view('librarian.edit',compact('product'));
+        return view('librarianview.edit',compact('book'));
     }
   
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Book $book)
     {
         $request->validate([
             'name' => 'required',
-            'genre' => 'genre',
             'author' => 'required',
+            'genre' => 'required',
             'synopsis' => 'required',
             'year_published' => 'required',
         ]);
@@ -96,14 +99,14 @@ class LibrarianController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        $book->delete();
-  
-        return redirect()->route('librarian.index')
-                        ->with('success','Product deleted successfully');
+        $res=Book::find($id)->delete();
+
+        return redirect()->route('librarian.index')->with('success','Product updated successfully');
+        
     }
 }

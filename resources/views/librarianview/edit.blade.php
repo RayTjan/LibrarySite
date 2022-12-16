@@ -1,13 +1,13 @@
-@extends('products.layout')
+@extends('librarianview.layout')
    
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Edit Product</h2>
+                <h2>Edit Book</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('librarian.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -23,27 +23,34 @@
         </div>
     @endif
   
-    <form action="{{ route('librarian.update',$product->id) }}" method="POST">
+    <form action="{{ route('librarian.update',$book->id) }}" method="POST">
         @csrf
         @method('PUT')
-   
-         <div class="row">
+        <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Name:</strong>
-                    <input type="text" name="name" value="{{ $product->name }}" class="form-control" placeholder="Name">
+                    <input type="text" name="name" class="form-control" value="{{ $book->name }}" placeholder="Name">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Detail:</strong>
-                    <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $product->detail }}</textarea>
+                    <strong>Genre:</strong>
+                    <input type="text" name="genre" class="form-control" value="{{ $book->genre }}" placeholder="Genre">
                 </div>
             </div>
+            <label for="year_published">Year Published:</label>
+            <input type="year" id="year_published" name="year_published" value="{{ $book->year_published }}" placeholder="YYYY">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Author:</strong>
-                    <textarea class="form-control" style="height:150px" name="author" placeholder="Detail">{{ $product->author }}</textarea>
+                    <input type="text" name="author" class="form-control" value="{{ $book->author }}"placeholder="Author">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Synopsis:</strong>
+                    <textarea class="form-control" style="height:150px" name="synopsis" value="{{ $book->synopsis }}"placeholder="Synopsis"></textarea>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

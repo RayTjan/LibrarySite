@@ -22,6 +22,7 @@ class BookSeeder extends Seeder
         $book = new Book();
         $book->name='The Midnight Library';
         $book->author='Millie Gretchen';
+        $book->genre='None';
         $book->synopsis='lorem ipsum dolor';
         $book->year_published = '2016';
         $book->save();
@@ -29,6 +30,7 @@ class BookSeeder extends Seeder
         $book = new Book();
         $book->name='Zero to One';
         $book->author='Tim Ferris';
+        $book->genre='None';
         $book->synopsis='lorem ipsum dolor';
         $book->year_published = '2010';
         $book->user_id = 2;
@@ -39,6 +41,7 @@ class BookSeeder extends Seeder
         $book = new Book();
         $book->name='Investing 101';
         $book->author='Warren Wick';
+        $book->genre='None';
         $book->synopsis='lorem ipsum dolor';
         $book->year_published = '2020';
         $book->user_id = 2;
@@ -49,6 +52,7 @@ class BookSeeder extends Seeder
         $book = new Book();
         $book->name='The Power of Habit';
         $book->author='Daniel Crieg';
+        $book->genre='None';
         $book->synopsis='lorem ipsum dolor';
         $book->year_published = '2017';
         $book->save();
