@@ -1,4 +1,4 @@
-@extends('librarianview.layout')
+@extends('librarian.layout')
    
 @section('content')
     <div class="row">
@@ -21,8 +21,7 @@
                 @endforeach
             </ul>
         </div>
-    @endif
-  
+    @endif  
     <form action="{{ route('librarian.update',$book->id) }}" method="POST">
         @csrf
         @method('PUT')
@@ -50,7 +49,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Synopsis:</strong>
-                    <textarea class="form-control" style="height:150px" name="synopsis" value="{{ $book->synopsis }}"placeholder="Synopsis"></textarea>
+                    <textarea class="form-control" style="height:150px" name="synopsis" placeholder="Synopsis">{{$book->synopsis}}</textarea>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

@@ -15,7 +15,7 @@ class Book extends Model
         'genre',
         'synopsis',
         'year_published',
-        'peminjam_id',
+        'user_id',
         'borrow_date',
         'due_date',
     ];

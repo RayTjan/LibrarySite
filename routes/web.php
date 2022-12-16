@@ -14,7 +14,7 @@ use App\Http\Controllers\LibrarianController;
 */
 
 Route::get('/', function () {
-    return view('librarianview.index');
+    return view('librarian.index');
 });
 
 Route::resource('librarian', LibrarianController::class);

@@ -1,4 +1,4 @@
-@extends('librarianview.layout')
+@extends('librarian.layout')
  
 @section('content')
     <div class="row">
@@ -31,7 +31,7 @@
             <td>
                 <form action="{{ route('librarian.destroy',$book->id) }}" method="POST">
    
-                    <a class="btn btn-info" href="{{ route('librarian.show',$book) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('librarian.show', $book->id) }}">Show</a>
     
                     <a class="btn btn-primary" href="{{ route('librarian.edit',$book->id) }}">Edit</a>
    

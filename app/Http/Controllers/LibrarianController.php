@@ -12,7 +12,7 @@ class LibrarianController extends Controller
     {
         $books = Book::all();
   
-        return view('librarianview.index',compact('books'));
+        return view('librarian.index',compact('books'));
     }
    
     /**
@@ -22,7 +22,7 @@ class LibrarianController extends Controller
      */
     public function create()
     {
-        return view('librarianview.create');
+        return view('librarian.create');
     }
   
     /**
@@ -53,13 +53,10 @@ class LibrarianController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show($id)
     {
-        return view('librarianview.show', [
-            'book' => $book
-        ]);
-        // return view('librarianview.show',compact('book'));
-
+        $book = Book::find($id);
+        return view('librarian.show', compact('book'));
     }
    
     /**
@@ -68,9 +65,10 @@ class LibrarianController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit($id)
     {
-        return view('librarianview.edit',compact('book'));
+        $book = Book::find($id);
+        return view('librarian.edit',compact('book'));
     }
   
     /**
@@ -80,17 +78,17 @@ class LibrarianController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
-            'author' => 'required',
             'genre' => 'required',
+            'author' => 'required',
             'synopsis' => 'required',
             'year_published' => 'required',
         ]);
   
-        $book->update($request->all());
+        $res = Book::find($id)->update($request->all());
   
         return redirect()->route('librarian.index')
                         ->with('success','Product updated successfully');

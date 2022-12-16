@@ -1,4 +1,4 @@
-@extends('librarianview.layout')
+@extends('librarian.layout')
   
 @section('content')
 <div class="row">
