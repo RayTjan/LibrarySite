@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LibrarianController;
 use App\Http\Controllers\ReaderController;
+use App\Http\Controllers\BorrowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,15 +24,15 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-Route::post('librarian/catalog', [\App\Http\Controllers\LibrarianController::class,'index'])->name('librarian.catalog');
-Route::post('librarian/userlist', [\App\Http\Controllers\LibrarianController::class,'userlist'])->name('librarian.userlist');
+Route::get('/librarian/catalog', [\App\Http\Controllers\LibrarianController::class,'catalog'])->name('librarian.catalog');
+Route::get('/librarian/userlist', [\App\Http\Controllers\LibrarianController::class,'userlist'])->name('librarian.userlist');
+Route::put('/librarian/updatebook', [\App\Http\Controllers\LibrarianController::class,'updatebookstatus'])->name('librarian.updatebook');
 Route::resource('librarian', LibrarianController::class);
+Route::resource('borrow', BorrowController::class);
 
 
 
 Route::resource('reader', ReaderController::class);
-Route::get('reader/borrowedbooks', [\App\Http\Controllers\ReaderController::class,'borrow'])->name('reader.borrowedbooks');
-Route::put('reader/updatebook', [\App\Http\Controllers\ReaderController::class,'updateBook'])->name('reader.updatebook');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

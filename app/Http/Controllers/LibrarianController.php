@@ -19,7 +19,6 @@ class LibrarianController extends Controller
 
     public function catalog()
     {
-        return("Hello");
         $books = Book::all();
   
         return view('librarian.catalog',compact('books'));

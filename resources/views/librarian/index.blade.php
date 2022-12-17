@@ -9,6 +9,7 @@
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('librarian.create') }}"> Create New Product</a>
             </div>
+            
         </div>
     </div>
    
@@ -20,14 +21,19 @@
    
     <table class="table table-bordered">
         <tr>
+            <th>ID</th>
             <th>Name</th>
             <th>Status</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($books as $book)
         <tr>
+            <td>{{ $book->id }}</td>
             <td>{{ $book->name }}</td>
             <td>{{ $book->status }}</td>
+            <td>
+
+            </td>
             <td>
                 <form action="{{ route('librarian.destroy',$book->id) }}" method="POST">
    

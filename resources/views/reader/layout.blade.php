@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     <!-- Styles -->
     <link href="{{ '/css/customStyle.css' }}" rel="stylesheet" type="text/css" >
@@ -31,11 +30,6 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('reader.index')" :active="request()->routeIs('reader.index')">
                             {{ __('Dashboard') }}
-                        </x-nav-link>
-                    </div>
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('reader.borrowedbooks')" :active="request()->routeIs('reader.borrowedbooks')">
-                            {{ __('Borrowed Books') }}
                         </x-nav-link>
                     </div>
                 </div>

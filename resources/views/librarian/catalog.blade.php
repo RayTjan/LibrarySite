@@ -17,8 +17,7 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-    {{ $book->name }}
-    {{-- <table class="table table-bordered">
+    <table class="table table-bordered">
         <tr>
             <th>Name</th>
             <th>Status</th>
@@ -42,6 +41,6 @@
             </td>
         </tr>
         @endforeach
-    </table> --}}
+    </table>
         
 @endsection

@@ -28,18 +28,7 @@
         <tr>
             <td>{{ $user->name }}</td>
             <td>{{ $user->status }}</td>
-            <td>
-                <form action="{{ route('librarian.destroy',$book->id) }}" method="POST">
-   
-                    <a class="btn btn-info" href="{{ route('librarian.show', $book->id) }}">Show</a>
-    
-                    <a class="btn btn-primary" href="{{ route('librarian.edit',$book->id) }}">Edit</a>
-   
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </td>
+            
         </tr>
         @endforeach
     </table>

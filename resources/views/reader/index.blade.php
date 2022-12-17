@@ -25,11 +25,11 @@
         <tr>
             <td>{{ $book->name }}</td>
             <td>{{ $book->status }}</td>
-            {{-- <td>
-                <a class="btn btn-info" href="{{ route('reader.show', $book->id) }}">Show</a>
-            </td> --}}
             <td>
-                <a class="btn btn-primary" href="{{ route('reader.edit',$book) }}" >Borrow</a>
+                <a class="btn btn-info" href="{{ route('reader.show', $book->id) }}">Show</a>
+            </td>
+            <td>
+                <a class="btn btn-primary" href="{{ route('reader.update',$book) }}" >Borrow</a>
             </td>
         </tr>
         @endforeach

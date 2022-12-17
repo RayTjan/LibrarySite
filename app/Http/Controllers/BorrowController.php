@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Book;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-use App\Http\Requests\UpdateBookRequest;
 
-class ReaderController extends Controller
+class BorrowController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +13,7 @@ class ReaderController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
-  
-        return view('reader.index',compact('books'));
+        //
     }
 
     /**
@@ -51,8 +45,7 @@ class ReaderController extends Controller
      */
     public function show($id)
     {
-        $book = Book::find($id);
-        return view('reader.show', compact('book'));
+        //
     }
 
     /**
@@ -63,20 +56,7 @@ class ReaderController extends Controller
      */
     public function edit($id)
     {
-        $book = Book::find($id);
-        $book = Book::updateOrCreate([
-            'id' => $book->id,
-            'name' => $book->name, 
-        ],
-            [
-            'status' => '1',
-            'user_id' => Auth::user()->id, 
-            'borrow_date'=>Carbon::now()->format('Y-m-d'), 
-            'due_date'=>Carbon::now()->addDays(7)->format('Y-m-d')]
-        );
-
-        return redirect()->route('reader.index')
-                        ->with('success','Product updated successfully');
+        //
     }
 
     /**
@@ -86,7 +66,7 @@ class ReaderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         $book = Book::find($id);
         $book = Book::updateOrCreate([
@@ -95,12 +75,12 @@ class ReaderController extends Controller
         ],
             [
             'status' => '1',
-            'user_id' => Auth::user()->id, 
+            'user_id' => $request->user_id, 
             'borrow_date'=>Carbon::now()->format('Y-m-d'), 
             'due_date'=>Carbon::now()->addDays(7)->format('Y-m-d')]
         );
 
-        return redirect()->route('reader.index')
+        return redirect()->route('librarian.index')
                         ->with('success','Product updated successfully');
     }
 
@@ -112,26 +92,20 @@ class ReaderController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        $book = Book::find($id);
+        $book = Book::updateOrCreate([
+            'id' => $book->id,
+            'name' => $book->name, 
+        ],
+            [
+            'status' => '0',
+            'user_id' => '', 
+            'borrow_date'=>'', 
+            'due_date'=>'',
+            ]
+        );
 
-    public function borrowedBooks()
-    {
-        $user = Auth::user();
-        $books = $user->books();
-  
-        return view('reader.borrow',compact('books'));
-    }
-
-    public function updateBook(Request $request, $id)
-    {
-        return $request;
-        // $book = Book::updateOrCreate(
-        //     ['user_id' => Auth::user()->id, 'borrow_date'=>Carbon\Carbon::now()->format('Y-m-d'), 'due_date'=>Carbon\Carbon::now()->addDays(7)->format('Y-m-d')]
-        // );
-
-        
-        // return redirect()->route('reader.index')
-        //                 ->with('success','Product updated successfully');
+        return redirect()->route('librarian.index')
+                        ->with('success','Product updated successfully');
     }
 }
