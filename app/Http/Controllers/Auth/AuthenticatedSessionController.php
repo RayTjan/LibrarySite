@@ -31,8 +31,13 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // redirect to specific user page
+        if (Auth::user()->id == 0){
+            return redirect()->route('librarian.index');
+        }
+        else{
+            return redirect()->route('reader.index');
+        }
     }
 
     /**
