@@ -14,8 +14,10 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-   @if(isset($books) == true)
-    <table class="table table-bordered">
+    {{$books}}
+    @if(isset($books) == true)
+    <p>hi</p>
+    {{-- <table class="table table-bordered">
         <tr>
             <th>Name</th>
             <th>Status</th>
@@ -24,16 +26,10 @@
         @foreach ($books as $book)
         <tr>
             <td>{{ $book->name }}</td>
-            <td>{{ $book->status }}</td>
-            {{-- <td>
-                <a class="btn btn-info" href="{{ route('reader.show', $book->id) }}">Show</a>
-            </td> --}}
-            <td>
-                <a class="btn btn-primary" href="{{ route('reader.edit',$book) }}" >Borrow</a>
-            </td>
+            <td>{{ $book->synopsis }}</td>
         </tr>
         @endforeach
-    </table>
+    </table> --}}
     @endif
         
 @endsection

@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
+use App\Models\User;
+
 
 class LibrarianController extends Controller
 {
@@ -14,7 +16,21 @@ class LibrarianController extends Controller
   
         return view('librarian.index',compact('books'));
     }
-   
+
+    public function catalog()
+    {
+        return("Hello");
+        $books = Book::all();
+  
+        return view('librarian.catalog',compact('books'));
+    }
+
+    public function userlist()
+    {
+        $users = User::all();
+  
+        return view('librarian.readerlist',compact('users'));
+    }
     /**
      * Show the form for creating a new resource.
      *
