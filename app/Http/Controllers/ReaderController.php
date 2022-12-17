@@ -63,20 +63,6 @@ class ReaderController extends Controller
      */
     public function edit($id)
     {
-        $book = Book::find($id);
-        $book = Book::updateOrCreate([
-            'id' => $book->id,
-            'name' => $book->name, 
-        ],
-            [
-            'status' => '1',
-            'user_id' => Auth::user()->id, 
-            'borrow_date'=>Carbon::now()->format('Y-m-d'), 
-            'due_date'=>Carbon::now()->addDays(7)->format('Y-m-d')]
-        );
-
-        return redirect()->route('reader.index')
-                        ->with('success','Product updated successfully');
     }
 
     /**

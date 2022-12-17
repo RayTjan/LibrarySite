@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('genre');
+            $table->string('image')->nullable();
             $table->enum('status',['0','1','2','3'])->default('0')->comment('0 = Available, 1 = Borrowed, 2 = Due, 3 = Booked' );
             $table->string('author');
             $table->string('synopsis');

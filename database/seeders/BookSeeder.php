@@ -36,7 +36,7 @@ class BookSeeder extends Seeder
         $book->user_id = 2;
         $book->borrow_date = Carbon::parse('2000-01-01');
         $book->due_date = Carbon::parse('2000-01-08');
-        $book->status = 1;
+        $book->status = 2;
         $book->save();
 
         $book = new Book();
@@ -48,7 +48,7 @@ class BookSeeder extends Seeder
         $book->user_id = 2;
         $book->borrow_date = Carbon::parse('2000-01-05');
         $book->due_date = Carbon::parse('2000-01-12');
-        $book->status = 1;
+        $book->status = 2;
         $book->save();
 
         $book = new Book();

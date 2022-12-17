@@ -24,11 +24,11 @@ class LibrarianController extends Controller
         return view('librarian.catalog',compact('books'));
     }
 
-    public function userlist()
+    public function borrowlist()
     {
-        $users = User::all();
-  
-        return view('librarian.readerlist',compact('users'));
+        $books = Book::whereIn('status', [2])->get();
+
+        return view('librarian.readerlist',compact('books'));
     }
     /**
      * Show the form for creating a new resource.
@@ -48,14 +48,22 @@ class LibrarianController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'name' => 'required',
             'genre' => 'required',
             'author' => 'required',
+            'image'=>'|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'synopsis' => 'required',
             'year_published' => 'required',
         ]);
-  
+
+        
+        if ($request->hasFile('image')) {
+            $request['image'] = $request->file('image')->store('gallery');
+
+        }
+        
         Book::create($request->all());
    
         return redirect()->route('librarian.index')
@@ -100,9 +108,13 @@ class LibrarianController extends Controller
             'genre' => 'required',
             'author' => 'required',
             'synopsis' => 'required',
+            'image'=>'image|file|max:5000',
             'year_published' => 'required',
         ]);
-  
+
+        if ($request->hasFile('image')) {
+            $request['image'] = $request->file('image')->store('gallery');
+        }
         $res = Book::find($id)->update($request->all());
   
         return redirect()->route('librarian.index')

@@ -12,6 +12,7 @@ class Book extends Model
     protected $fillable = [
         'id',
         'name',
+        'image',
         'author',
         'status',
         'genre',
@@ -23,6 +24,7 @@ class Book extends Model
     ];
 
     public function borrower(){
-        return $this->belongsTo(User::class);
+
+        return $this->belongsTo(User::class, 'user_id','id');
     }
 }

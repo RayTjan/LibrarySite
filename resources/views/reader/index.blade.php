@@ -4,8 +4,9 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Welcome to the Library</h2>
+                <h2>Welcome to the LibrarySite</h2>
             </div>
+            
         </div>
     </div>
    
@@ -14,26 +15,71 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-   @if(isset($books) == true)
-    <table class="table table-bordered">
-        <tr>
-            <th>Name</th>
-            <th>Status</th>
-            <th width="280px">Action</th>
-        </tr>
+    <input class="form-control" id="myInput" type="text" placeholder="Search..">
+    <table class="table table-striped">
+        <thead>
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Status</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Author</th>
+            <th scope="col">Year Published</th>
+            <th scope="col">Image</th>
+        </thead>
         @foreach ($books as $book)
         <tr>
+            <td scope="row">{{ $book->id }}</td>
             <td>{{ $book->name }}</td>
-            <td>{{ $book->status }}</td>
             <td>
-                <a class="btn btn-info" href="{{ route('reader.show', $book->id) }}">Show</a>
+                <div class='d-inline'>
+                    <p>
+                        @switch($book->status)
+                        @case(0)
+                            Available
+                        @break
+
+                        @case(1)
+                            Borrowed
+                        @break
+
+                        @case(2)
+                            Due
+                        @break
+
+                        @case(3)
+                            Booked
+                        @break
+
+                        @default
+                            Error, Try Again
+                    @endswitch
+                    </p>
+                </div>
             </td>
+            <td>{{ $book->genre }}</td>
+            <td>{{ $book->author }}</td>
+            <td>{{ $book->year_published }}</td>
             <td>
-                <a class="btn btn-primary" href="{{ route('reader.update',$book) }}" >Borrow</a>
+                @if(isset($book->image))
+                <div style="max-height: 400px; overflow:hidden;">
+                    <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}" class="img-fluid">
+                </div>
+                @else
+                    <img src="https://source.unsplash.com/random/500x400?book"
+                        class="card-img-top" alt="{{ $book->name }}">
+                @endif
             </td>
         </tr>
         @endforeach
     </table>
-    @endif
-        
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+        </script>
 @endsection

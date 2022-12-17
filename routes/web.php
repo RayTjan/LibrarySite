@@ -25,7 +25,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/librarian/catalog', [\App\Http\Controllers\LibrarianController::class,'catalog'])->name('librarian.catalog');
-Route::get('/librarian/userlist', [\App\Http\Controllers\LibrarianController::class,'userlist'])->name('librarian.userlist');
+Route::get('/librarian/borrowlist', [\App\Http\Controllers\LibrarianController::class,'borrowlist'])->name('librarian.borrowlist');
 Route::put('/librarian/updatebook', [\App\Http\Controllers\LibrarianController::class,'updatebookstatus'])->name('librarian.updatebook');
 Route::resource('librarian', LibrarianController::class);
 Route::resource('borrow', BorrowController::class);

@@ -4,10 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Welcome to the Catalog</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('librarian.create') }}"> Create New Product</a>
+                <h2>List of Borrowed Books</h2>
             </div>
         </div>
     </div>
@@ -17,18 +14,23 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-   
-    <table class="table table-bordered">
+    <table class="table table-striped">
         <tr>
-            <th>Name</th>
-            <th>Status</th>
-            <th width="280px">Action</th>
+            <th scope="col">Title</th>
+            <th scope="col">Borrower Name</th>
+            <th scope="col">Borrow Date</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Action</th>
         </tr>
-        @foreach ($users as $user)
+        @foreach ($books as $book)
         <tr>
-            <td>{{ $user->name }}</td>
-            <td>{{ $user->status }}</td>
-            
+            <td scope="row">{{$book->name}} </td>
+            <td >{{$book->borrower()->get('name')}} </td>
+            <td >{{$book->borrow_date}} </td>
+            <td>{{$book->due_date}} </td>
+            <td>
+                <a class="btn bg-maincolor text-white" href="{{ route('borrow.destroy',$book->id) }}" >Resolve</a>
+            </td>
         </tr>
         @endforeach
     </table>

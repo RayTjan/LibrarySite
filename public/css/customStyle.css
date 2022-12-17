@@ -1,3 +1,53 @@
 #editarea {
     background-color: red;
 }
+
+.box {
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    border: 1px solid black;
+    clear: both;
+  }
+
+.red {
+    background-color: red;
+    opacity: 0.7;
+}
+.green {
+    background-color: green;
+    opacity: 0.7;
+}
+
+.blue {
+    background-color: blue;
+    opacity: 0.7;
+}
+
+.text-maincolor{
+    color:#54433A;
+}
+
+.text-secondarycolor{
+    color:#A87C72;
+}
+
+.text-tertiarycolor{
+    color: #FFEDE9;
+}
+
+.bg-maincolor{
+    background-color:#AA4D00;
+}
+
+.bg-secondarycolor{
+    background-color:#A87C72;
+}
+
+.bg-tertiarycolor{
+    background-color: #FFEDE9;
+}
+
+.ui-datepicker-calendar {
+    display: none;
+    }
