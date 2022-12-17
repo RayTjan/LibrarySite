@@ -10,7 +10,16 @@
             </div>
         </div>
     </div>
-   
+    <div class="row">
+        <div class="w-25 p-3">
+            @if(isset($book->image))
+                <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}" class="img-fluid">
+            @else
+                <img src="https://source.unsplash.com/random/250x350?book"
+                    class="card-img-top" alt="{{ $book->name }}">
+            @endif
+        </div>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">

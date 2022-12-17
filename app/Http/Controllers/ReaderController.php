@@ -54,25 +54,13 @@ class ReaderController extends Controller
         $book = Book::find($id);
         return view('reader.show', compact('book'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
+/**
+     * Performs static data change
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update($id)
     {
         $book = Book::find($id);
         $book = Book::updateOrCreate([
@@ -89,7 +77,6 @@ class ReaderController extends Controller
         return redirect()->route('reader.index')
                         ->with('success','Product updated successfully');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -119,5 +106,14 @@ class ReaderController extends Controller
         
         // return redirect()->route('reader.index')
         //                 ->with('success','Product updated successfully');
+    }
+
+    public function bookList()
+    {
+
+        $user = Auth::user();
+        $books = $user->books()->get();
+
+        return view('reader.booklist',compact('books'));
     }
 }

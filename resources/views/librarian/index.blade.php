@@ -18,7 +18,6 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-    <input class="form-control" id="myInput" type="text" placeholder="Search..">
     <table class="table table-striped">
         <thead>
             <th scope="col">ID</th>
@@ -39,19 +38,19 @@
                     <p>
                         @switch($book->status)
                         @case(0)
-                            Available
+                            AVAILABLE
                         @break
 
                         @case(1)
-                            Borrowed
+                            BORROWED
                         @break
 
                         @case(2)
-                            Due
+                            DUE
                         @break
 
                         @case(3)
-                            Booked
+                            BOOKED
                         @break
 
                         @default
@@ -69,7 +68,7 @@
                     <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}" class="img-fluid">
                 </div>
                 @else
-                    <img src="https://source.unsplash.com/random/500x400?book"
+                    <img src="https://source.unsplash.com/random/250x350?book"
                         class="card-img-top" alt="{{ $book->name }}">
                 @endif
             </td>
@@ -88,14 +87,4 @@
         </tr>
         @endforeach
     </table>
-    <script>
-        $(document).ready(function(){
-          $("#myInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function() {
-              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-          });
-        });
-        </script>
 @endsection

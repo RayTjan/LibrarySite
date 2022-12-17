@@ -26,7 +26,7 @@ class LibrarianController extends Controller
 
     public function borrowlist()
     {
-        $books = Book::whereIn('status', [2])->get();
+        $books = Book::whereIn('status', [2,3,4])->get();
 
         return view('librarian.readerlist',compact('books'));
     }
@@ -107,6 +107,7 @@ class LibrarianController extends Controller
             'name' => 'required',
             'genre' => 'required',
             'author' => 'required',
+            'status' => 'required',
             'synopsis' => 'required',
             'image'=>'image|file|max:5000',
             'year_published' => 'required',
@@ -133,5 +134,22 @@ class LibrarianController extends Controller
 
         return redirect()->route('librarian.index')->with('success','Product updated successfully');
         
+    }
+
+    public function resolve(Book $book, $id)
+    {
+        $book = Book::updateOrCreate([
+            'id' => $book->id,
+            'name' => $book->name, 
+        ],
+            [
+            'status' => '0',
+            'user_id' => '', 
+            'borrow_date'=>'', 
+            'due_date'=>'',
+            ]
+        );
+        return redirect()->route('librarian.index')
+                        ->with('success','Product updated successfully');
     }
 }

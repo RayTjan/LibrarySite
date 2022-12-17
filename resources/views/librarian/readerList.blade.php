@@ -29,7 +29,8 @@
             <td >{{$book->borrow_date}} </td>
             <td>{{$book->due_date}} </td>
             <td>
-                <a class="btn bg-maincolor text-white" href="{{ route('borrow.destroy',$book->id) }}" >Resolve</a>
+                <a class="btn bg-maincolor text-white" href="{{ route('borrow.edit',$book) }}" >Resolve</a>
+                <a class="btn btn-primary" href="{{ route('librarian.edit',array($book, $book->id)) }}">Edit</a>
             </td>
         </tr>
         @endforeach

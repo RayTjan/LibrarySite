@@ -34,6 +34,49 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 p-2">
                 <div class="form-group">
+                    <strong>Status:</strong>
+                    <select class="form-select" aria-label="Default select example" id="status" name="status">
+                        @switch($book->status)
+                            @case(0)
+                                <option selected="selected" value=0>Available</option>
+                                <option value=1>Borrowed</option>
+                                <option value=2>Due</option>
+                                <option value=3>Booked</option>
+                            @break
+
+                            @case(1)
+                                <option value=0>Available</option>
+                                <option selected="selected" value=1>Borrowed</option>
+                                <option value=2>Due</option>
+                                <option value=3>Booked</option>
+                            @break
+
+                            @case(2)
+                                <option value=0>Available</option>
+                                <option value=1>Borrowed</option>
+                                <option selected="selected" value=2>Due</option>
+                                <option value=3>Booked</option>
+                            @break
+
+                            @case(3)
+                                <option value=0>Available</option>
+                                <option value=1>Borrowed</option>
+                                <option value=2>Due</option>
+                                <option selected="selected" value=3>Booked</option>
+                            @break
+
+                            @default
+                                <option value="0">Available</option>
+                                <option value="1">Borrowed</option>
+                                <option value="2">Due</option>
+                                <option value="3">Booked</option>
+                            @endswitch
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 p-2">
+                <div class="form-group">
                     <strong>Genre:</strong>
                     <input type="text" name="genre" class="form-control" value="{{ $book->genre }}" placeholder="Genre">
                 </div>

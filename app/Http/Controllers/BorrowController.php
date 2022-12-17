@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Book;
+use App\Models\User;
 class BorrowController extends Controller
 {
     /**
@@ -49,24 +50,12 @@ class BorrowController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Performs static data change
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
     {
         $book = Book::find($id);
         $book = Book::updateOrCreate([
@@ -74,13 +63,13 @@ class BorrowController extends Controller
             'name' => $book->name, 
         ],
             [
-            'status' => '1',
-            'user_id' => $request->user_id, 
-            'borrow_date'=>Carbon::now()->format('Y-m-d'), 
-            'due_date'=>Carbon::now()->addDays(7)->format('Y-m-d')]
+            'status' => '0',
+            'user_id' => null, 
+            'borrow_date'=>null, 
+            'due_date'=>null,
+            ]
         );
-
-        return redirect()->route('librarian.index')
+        return redirect()->route('librarian.borrowlist')
                         ->with('success','Product updated successfully');
     }
 
@@ -104,7 +93,6 @@ class BorrowController extends Controller
             'due_date'=>'',
             ]
         );
-
         return redirect()->route('librarian.index')
                         ->with('success','Product updated successfully');
     }
