@@ -12,7 +12,7 @@
         </div>
         <br>
             <div class="pull-left">
-                <a class="btn bg-maincolor text-white" href="{{ route('librarian.sortduedates') }}">Sort</a>
+                <a class="btn bg-maincolor text-white" href="{{ route('book.sortduedates') }}">Sort</a>
             </div>
     </div>
    
@@ -65,7 +65,7 @@
                 @if ($book->status == 3)
                 <td>
                 <!--Makes book into borrowed and adds Borrow and due date-->
-                <form action="{{ route('librarian.borrow',$book->id) }}" method="POST" enctype='multipart/form-data'>
+                <form action="{{ route('book.borrow',$book->id) }}" method="POST" enctype='multipart/form-data'>
                         @method('PUT')
                         @csrf
                         <input name="id" type="hidden" value={{$book->id}}>
@@ -76,12 +76,12 @@
                 @endif
                 <td>
                 <!--Edit book information-->
-                <a class="btn bg-maincolor text-white" href="{{ route('librarian.edit',array($book, $book->id)) }}"><i
+                <a class="btn bg-maincolor text-white" href="{{ route('book.edit',array($book, $book->id)) }}"><i
                     class="bi bi-pencil"></i></a>
                 </td>
                 <td>
                     <!--erases any trace of user booking/borrow-->
-                    <form action="{{ route('librarian.resolve',$book->id) }}" method="POST" enctype='multipart/form-data'>
+                    <form action="{{ route('book.resolve',$book->id) }}" method="POST" enctype='multipart/form-data'>
                             @method('PUT')
                             @csrf
                             <input name="id" type="hidden" value={{$book->id}}>

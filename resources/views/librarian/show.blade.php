@@ -8,7 +8,7 @@
                 <h2> Show Book</h2>
             </div>
             <div class="pull-right">
-                <a class="btn bg-maincolor text-white" href="{{ route('librarian.index') }}"> <i class="bi bi-caret-left"></i>
+                <a class="btn bg-maincolor text-white" href="{{ route('book.index') }}"> <i class="bi bi-caret-left"></i>
                 </a>
             </div>
         </div>
@@ -36,13 +36,13 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <p>Year Published:  {{ $book->year_published }}</p>
+                <p>Year Published:  {{ $book->publishers->first()->year_published }}</p>
                
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <p>Author: {{ $book->author }}</p>
+                <p>Author: {{ $book->publishers->first()->author }}</p>
                 
             </div>
         </div>

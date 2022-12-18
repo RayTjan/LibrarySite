@@ -9,7 +9,7 @@
                 <h2>Edit Book</h2>
             </div>
             <div class="pull-right">
-                <a class="btn bg-maincolor text-white" href="{{ route('librarian.index') }}"> <i class="bi bi-caret-left"></i>
+                <a class="btn bg-maincolor text-white" href="{{ route('book.index') }}"> <i class="bi bi-caret-left"></i>
                 </a>
             </div>
         </div>
@@ -25,7 +25,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('librarian.update', $book->id) }}" method="POST" enctype='multipart/form-data'>
+    <form action="{{ route('book.update', $book->id) }}" method="POST" enctype='multipart/form-data'>
         @csrf
         @method('PUT')
         <div class="row">
@@ -108,7 +108,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 p-2">
                 <div class="form-group">
                     <strong>Year Published:</strong><br>
-                    <input type="year" id="year_published" name="year_published" value="{{ $book->year_published }}"
+                    <input type="year" id="year_published" name="year_published" value="{{ $book->publishers()->first()->year_published }}"
                         placeholder="YYYY" maxlength="4">
                 </div>
             </div>
@@ -116,7 +116,7 @@
                 <div class="form-group">
                     <strong>Author:</strong>
                     <input type="text" name="author" class="form-control"
-                        value="{{ $book->author }}"placeholder="Author">
+                        value="{{ $book->publishers()->first()->author }}"placeholder="Author">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 p-2">

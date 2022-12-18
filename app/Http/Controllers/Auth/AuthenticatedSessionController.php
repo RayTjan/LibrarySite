@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
         // redirect to specific user page
         if (Auth::user()->id == 0){
-            return redirect()->route('librarian.index');
+            return redirect()->route('book.index');
         }
         else{
             return redirect()->route('reader.index');

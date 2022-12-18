@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LibrarianController;
+use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\ComicController;
 use App\Http\Controllers\ReaderController;
 use App\Http\Controllers\BorrowController;
 
@@ -18,19 +20,19 @@ use App\Http\Controllers\BorrowController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('reader');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('reader');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 //Unique Routes
-Route::get('/librarian/sortbooks', [\App\Http\Controllers\LibrarianController::class,'sortbooks'])->name('librarian.sortbooks')->middleware('auth', 'isAdmin');
-Route::get('/librarian/sortduedates', [\App\Http\Controllers\LibrarianController::class,'sortduedates'])->name('librarian.sortduedates')->middleware('auth', 'isAdmin');
-Route::get('/librarian/borrowlist', [\App\Http\Controllers\LibrarianController::class,'borrowlist'])->name('librarian.borrowlist')->middleware('auth', 'isAdmin');
-Route::put('/librarian/resolve/{id}',[\App\Http\Controllers\LibrarianController::class,'resolve'])->name('librarian.resolve')->middleware('auth', 'isAdmin');
-Route::put('/librarian/startborrow/{id}',[\App\Http\Controllers\LibrarianController::class,'startborrow'])->name('librarian.borrow')->middleware('auth', 'isAdmin');
+Route::get('/book/sortbooks', [\App\Http\Controllers\Admin\BookController::class,'sortbooks'])->name('book.sortbooks')->middleware('auth', 'isAdmin');
+Route::get('/book/sortduedates', [\App\Http\Controllers\Admin\BookController::class,'sortduedates'])->name('book.sortduedates')->middleware('auth', 'isAdmin');
+Route::get('/book/borrowlist', [\App\Http\Controllers\Admin\BookController::class,'borrowlist'])->name('book.borrowlist')->middleware('auth', 'isAdmin');
+Route::put('/book/resolve/{id}',[\App\Http\Controllers\Admin\BookController::class,'resolve'])->name('book.resolve')->middleware('auth', 'isAdmin');
+Route::put('/book/startborrow/{id}',[\App\Http\Controllers\Admin\BookController::class,'startborrow'])->name('book.borrow')->middleware('auth', 'isAdmin');
 Route::put('/reader/book/{id}', [\App\Http\Controllers\ReaderController::class,'book'])->name('reader.book')->middleware('auth');
 Route::get('/reader/booklist', [\App\Http\Controllers\ReaderController::class,'booklist'])->name('reader.booklist')->middleware('auth');
 
@@ -40,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource('librarian', LibrarianController::class)->middleware('isAdmin');
+    Route::resource('book', BookController::class)->middleware('isAdmin');
     Route::resource('reader', ReaderController::class);
 });
 

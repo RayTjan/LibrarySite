@@ -40,13 +40,13 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <p>Year Published:</p>
-                {{ $book->year_published }}
+                {{ $book->publishers->first()->year_published }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <p>Author:</p>
-                {{ $book->author }}
+                {{ $book->publishers->first()->author }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
