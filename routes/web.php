@@ -25,19 +25,21 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/librarian/catalog', [\App\Http\Controllers\LibrarianController::class,'catalog'])->name('librarian.catalog');
-Route::get('/librarian/borrowlist', [\App\Http\Controllers\LibrarianController::class,'borrowlist'])->name('librarian.borrowlist');
-Route::put('/librarian/resolve/{id}',['as' =>'librarian', 'uses' => '\App\Http\Controllers\LibrarianController@resolve']);
-Route::get('/reader/booklist', [\App\Http\Controllers\ReaderController::class,'booklist'])->name('reader.booklist');
+Route::get('/librarian/catalog', [\App\Http\Controllers\LibrarianController::class,'catalog'])->name('librarian.catalog')->middleware('auth', 'isAdmin');
+Route::get('/librarian/borrowlist', [\App\Http\Controllers\LibrarianController::class,'borrowlist'])->name('librarian.borrowlist')->middleware('auth', 'isAdmin');
+Route::put('/librarian/resolve/{id}',['as' =>'librarian', 'uses' => '\App\Http\Controllers\LibrarianController@resolve'])->middleware('auth', 'isAdmin');
+Route::get('/reader/booklist', [\App\Http\Controllers\ReaderController::class,'booklist'])->name('reader.booklist')->middleware('auth');
 
-Route::resource('reader', ReaderController::class);
-Route::resource('librarian', LibrarianController::class)->middleware('auth');
-Route::resource('borrow', BorrowController::class)->middleware('auth');
+Route::resource('reader', ReaderController::class)->middleware('auth');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('librarian', LibrarianController::class)->middleware('isAdmin');
+    Route::resource('borrow', BorrowController::class)->middleware('isAdmin');
 });
 
 require __DIR__.'/auth.php';

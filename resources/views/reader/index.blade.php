@@ -1,4 +1,4 @@
-@extends('reader.layout')
+@extends('layout')
  
 @section('content')
     <div class="row">
@@ -62,8 +62,9 @@
 
 
                             </p>
-                            <a href="{{ route('reader.show', $book->id)  }}" class="btn bg-maincolor text-white"><i
-                                class="bi bi-info-circle"></a>
+                            <a href="{{ route('reader.show', $book->id)  }}" class="btn bg-maincolor text-white">
+                                Read more
+                            </a>
                             @if(isset($book->user_id) == false)
                             <a href="{{ route('reader.edit', $book->id)  }}" class="btn bg-maincolor text-white">Book</a>
                             @endif

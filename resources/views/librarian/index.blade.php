@@ -1,5 +1,5 @@
-@extends('librarian.layout')
- 
+@extends('layout')
+
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -9,10 +9,10 @@
             <div class="pull-right">
                 <a class="btn bg-maincolor text-white" href="{{ route('librarian.create') }}"> Create New Product</a>
             </div>
-            
+
         </div>
     </div>
-   
+
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
@@ -30,64 +30,66 @@
             <th scope="col">Actions</th>
         </thead>
         @foreach ($books as $book)
-        <tr>
-            <td scope="row">{{ $book->id }}</td>
-            <td>{{ $book->name }}</td>
-            <td>
-                <div class='d-inline'>
-                    <p>
-                        @switch($book->status)
-                        @case(0)
-                            AVAILABLE
-                        @break
+            <tr>
+                <td scope="row">{{ $book->id }}</td>
+                <td>{{ $book->name }}</td>
+                <td>
+                    <div class='d-inline'>
+                        <p>
+                            @switch($book->status)
+                                @case(0)
+                                    AVAILABLE
+                                @break
 
-                        @case(1)
-                            BORROWED
-                        @break
+                                @case(1)
+                                    BORROWED
+                                @break
 
-                        @case(2)
-                            DUE
-                        @break
+                                @case(2)
+                                    DUE
+                                @break
 
-                        @case(3)
-                            BOOKED
-                        @break
+                                @case(3)
+                                    BOOKED
+                                @break
 
-                        @default
-                            Error, Try Again
-                    @endswitch
-                    </p>
-                </div>
-            </td>
-            <td>{{ $book->genre }}</td>
-            <td>{{ $book->author }}</td>
-            <td>{{ $book->year_published }}</td>
-            <td>
-                @if(isset($book->image))
-                <div style="max-height: 400px; overflow:hidden;">
-                    <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}" class="img-fluid">
-                </div>
-                @else
-                    <img src="https://source.unsplash.com/random/250x350?book"
-                        class="card-img-top" alt="{{ $book->name }}">
-                @endif
-            </td>
-            <td>
-                <form action="{{ route('librarian.destroy',$book->id) }}" method="POST">
-   
-                    <a class="btn btn-secondary" href="{{ route('librarian.show', $book->id) }}"><i class="bi bi-info-circle"></i>
-                    </a>
-                    
-                    <a class="btn btn-primary" href="{{ route('librarian.edit',$book->id) }}"><i class="bi bi-pencil"></i>
-                    </a>
-   
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i>
-                    </button>
-                </form>
-            </td>
-        </tr>
+                                @default
+                                    Error, Try Again
+                            @endswitch
+                        </p>
+                    </div>
+                </td>
+                <td>{{ $book->genre }}</td>
+                <td>{{ $book->author }}</td>
+                <td>{{ $book->year_published }}</td>
+                <td>
+                    @if (isset($book->image))
+                        <div style="max-height: 400px; overflow:hidden;">
+                            <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}" class="img-fluid">
+                        </div>
+                    @else
+                        <img src="https://source.unsplash.com/random/250x350?book" class="card-img-top"
+                            alt="{{ $book->name }}">
+                    @endif
+                </td>
+                <td>
+                    <form action="{{ route('librarian.destroy', $book->id) }}" method="POST">
+
+                        <a class="btn btn-secondary" href="{{ route('librarian.show', $book->id) }}"><i
+                                class="bi bi-info-circle"></i>
+                        </a>
+
+                        <a class="btn btn-primary" href="{{ route('librarian.edit', $book->id) }}"><i
+                                class="bi bi-pencil"></i>
+                        </a>
+
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
         @endforeach
     </table>
 @endsection

@@ -1,4 +1,4 @@
-@extends('reader.layout')
+@extends('layout')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -6,17 +6,17 @@
                 <h2> Show Book</h2>
             </div>
             <div class="pull-right">
-                <a class="btn bg-maincolor text-white" href="{{ route('reader.index') }}"> Back</a>
+                <a class="btn bg-maincolor text-white" href="{{ route('reader.index') }}"> <i class="bi bi-caret-left"></i>
+                </a>
             </div>
         </div>
     </div>
     <div class="">
         <div class="w-25 p-3">
-            @if(isset($book->image))
+            @if (isset($book->image))
                 <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}" class="img-fluid">
             @else
-                <img src="https://source.unsplash.com/random/250x350?book"
-                    class="card-img-top" alt="{{ $book->name }}">
+                <img src="https://source.unsplash.com/random/250x350?book" class="card-img-top" alt="{{ $book->name }}">
             @endif
         </div>
     </div>
@@ -31,7 +31,7 @@
             <div class="form-group">
                 <p>Genre:</p>
                 <p>
-                {{ $book->genre }}
+                    {{ $book->genre }}
                 </p>
             </div>
         </div>
@@ -54,9 +54,9 @@
             </div>
         </div>
         <div class="w-25 p-3">
-            @if(isset($book->user_id) == false)
-            <a href="{{ route('reader.edit', $book->id)  }}" class="btn bg-maincolor text-white">Borrow</a>
+            @if (isset($book->user_id) == false)
+                <a href="{{ route('reader.edit', $book->id) }}" class="btn bg-maincolor text-white">Borrow</a>
             @endif
-        </div>    
+        </div>
     </div>
 @endsection
