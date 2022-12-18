@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\ObjectInterface;
+use App\Models\Interface\ObjectInterface;
 
 class Book extends Model implements ObjectInterface
 {
@@ -14,11 +14,9 @@ class Book extends Model implements ObjectInterface
         'id',
         'name',
         'image',
-        'author',
         'status',
         'genre',
         'synopsis',
-        'year_published',
         'user_id',
         'borrow_date',
         'due_date',
