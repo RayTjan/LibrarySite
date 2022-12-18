@@ -15,3 +15,4 @@
         </div>
     </div>
 </x-app-layout>
+<!-- Used laravel breeze for authentication, tailwind for it, meanwhile the self-made views uses bootstrap, FUSION!-->

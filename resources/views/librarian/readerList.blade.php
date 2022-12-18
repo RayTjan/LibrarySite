@@ -12,7 +12,8 @@
         </div>
         <br>
             <div class="pull-left">
-                <a class="btn bg-maincolor text-white" href="{{ route('book.sortduedates') }}">Sort</a>
+                <a class="btn bg-maincolor text-white" href="{{ route('book.sortduedates') }}">Sort by Date</a>
+                <a class="btn bg-maincolor text-white" href="{{ route('book.borrowlist') }}">Revert Sort</a>
             </div>
     </div>
    

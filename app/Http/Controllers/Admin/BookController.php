@@ -53,7 +53,7 @@ class BookController extends Controller
         return view('librarian.readerlist', compact('books'));
     }
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new book.
      *
      * @return \Illuminate\Http\Response
      */
@@ -63,10 +63,8 @@ class BookController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created book & published in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -97,10 +95,7 @@ class BookController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Book  $book
-     * @return \Illuminate\Http\Response
+     * Display the specified book.
      */
     public function show($id)
     {

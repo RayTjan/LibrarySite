@@ -9,6 +9,9 @@ use Illuminate\Routing\Controller;
 
 class ComicController extends Controller
 {
+    // Still empty, lack of time, but base understanding is shown in the Book Controller
+
+    
     /**
      * Display a listing of the resource.
      *

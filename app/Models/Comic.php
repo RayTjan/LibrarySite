@@ -25,4 +25,5 @@ class Comic extends Model
     {
         return $this->morphMany(Published::class, 'publishedable');
     }
+    //Not enough time, was not able to use or show this
 }

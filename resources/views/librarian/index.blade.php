@@ -9,11 +9,12 @@
                 <h2>Welcome to the Library</h2>
             </div>
             <div class="pull-right">
-                <a class="btn bg-maincolor text-white" href="{{ route('book.create') }}"> Create New Product</a>
+                <a class="btn bg-maincolor text-white" href="{{ route('book.create') }}"> Add New Book</a>
             </div>
             <br>
             <div class="pull-left">
-                <a class="btn bg-maincolor text-white" href="{{ route('book.sortbooks') }}">Sort</a>
+                <a class="btn bg-maincolor text-white" href="{{ route('book.sortbooks') }}">Sort by Name</a>
+                <a class="btn bg-maincolor text-white" href="{{ route('book.index') }}">Revert Sort</a>
             </div>
         </div>
     </div>
