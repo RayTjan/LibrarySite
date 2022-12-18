@@ -76,6 +76,24 @@
                     </select>
                 </div>
             </div>
+            
+            <div class="col-xs-12 col-sm-12 col-md-12 p-2">
+                <div class="form-group">
+                    <strong>Reader:</strong>
+                    <select class="form-select" aria-label="Default select example" id="user_id" name="user_id">
+                        <option>Select Reader</option>
+                        @foreach($users as $user)
+                            <option value={{$user->id}}>{{$user->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 p-2">
+                <div class="form-group">
+                    <strong>Name:</strong>
+                    <input type="text" name="name" class="form-control" value="{{ $book->name }}" placeholder="Name">
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-12 p-2">
                 <div class="form-group">
                     <strong>Genre:</strong>

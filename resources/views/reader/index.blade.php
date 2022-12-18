@@ -62,12 +62,30 @@
 
 
                             </p>
-                            <a href="{{ route('reader.show', $book->id)  }}" class="btn bg-maincolor text-white">
-                                Read more
-                            </a>
-                            @if(isset($book->user_id) == false)
-                            <a href="{{ route('reader.edit', $book->id)  }}" class="btn bg-maincolor text-white">Book</a>
-                            @endif
+                            <table>
+                                <tr>
+                                    <td>
+                                        <a href="{{ route('reader.show', $book->id)  }}" class="btn bg-maincolor text-white">
+                                            Read more
+                                        </a>
+                                    </td>
+                                    
+                                        @if(isset($book->user_id) == false)
+                                        <td>
+                                            <form action="{{ route('reader.book',$book->id) }}" method="POST" enctype='multipart/form-data'>
+                                                @method('PUT')
+                                                @csrf
+                                                <input name="id" type="hidden" value={{$book->id}}>
+                                                <button type="submit" class="btn bg-maincolor text-white"><i class="bi bi-journal-arrow-down"></i>
+                                                </button>
+                                            </form> 
+                                        </td>                           
+                                        @endif
+                                    
+                                </tr>
+                            </table>
+                            
+                            
 
                         </div>
                     </div>

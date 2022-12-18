@@ -7,6 +7,7 @@ use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\User;
+use Carbon\Carbon;
 
 
 class LibrarianController extends Controller
@@ -92,7 +93,8 @@ class LibrarianController extends Controller
     public function edit($id)
     {
         $book = Book::find($id);
-        return view('librarian.edit', compact('book'));
+        $users = User::whereIn('role',['1'])->get();
+        return view('librarian.edit', compact('book', 'users'));
     }
 
     /**
@@ -117,12 +119,59 @@ class LibrarianController extends Controller
         if ($request->hasFile('image')) {
             $request['image'] = $request->file('image')->store('gallery');
         }
+        
         $res = Book::find($id)->update($request->all());
+        $book = Book::find($id);
+        if(isset($request['user_id']) && $request['status'] == '1'){
+            $book = Book::updateOrCreate(
+                [
+                    'id' => $book->id,
+                    'name' => $book->name,
+                ],
+                [
+                    'borrow_date' => Carbon::now()->format('Y-m-d'),
+                    'due_date' => Carbon::now()->addDays(7)->format('Y-m-d')
+                ]
+            );
+        }
+        return redirect()->route('librarian.index')
+            ->with('success', 'Product updated successfully');
+    }
+    public function resolve(Request $request, $id)
+    {
+        $book = Book::find($id);
+        $book = Book::updateOrCreate(
+            [
+                'id' => $book->id,
+                'name' => $book->name,
+            ],
+            [
+                'status' => '0',
+                'user_id' => null,
+                'borrow_date' => null,
+                'due_date' => null,
+            ]
+        );
+        return redirect()->route('librarian.index')
+            ->with('success', 'Product updated successfully');
+    }
+    public function startborrow($id){
+        $book = Book::find($id);
+        $book = Book::updateOrCreate(
+            [
+                'id' => $book->id,
+                'name' => $book->name,
+            ],
+            [
+                'status' => '1',
+                'borrow_date' => Carbon::now()->format('Y-m-d'),
+                'due_date' => Carbon::now()->addDays(7)->format('Y-m-d')
+            ]
+        );
 
         return redirect()->route('librarian.index')
             ->with('success', 'Product updated successfully');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -137,21 +186,5 @@ class LibrarianController extends Controller
 
     }
 
-    public function resolve(Book $book, $id)
-    {
-        $book = Book::updateOrCreate(
-            [
-                'id' => $book->id,
-                'name' => $book->name,
-            ],
-            [
-                'status' => '0',
-                'user_id' => '',
-                'borrow_date' => '',
-                'due_date' => '',
-            ]
-        );
-        return redirect()->route('librarian.index')
-            ->with('success', 'Product updated successfully');
-    }
+
 }

@@ -27,7 +27,9 @@ Route::get('/dashboard', function () {
 
 Route::get('/librarian/catalog', [\App\Http\Controllers\LibrarianController::class,'catalog'])->name('librarian.catalog')->middleware('auth', 'isAdmin');
 Route::get('/librarian/borrowlist', [\App\Http\Controllers\LibrarianController::class,'borrowlist'])->name('librarian.borrowlist')->middleware('auth', 'isAdmin');
-Route::put('/librarian/resolve/{id}',['as' =>'librarian', 'uses' => '\App\Http\Controllers\LibrarianController@resolve'])->middleware('auth', 'isAdmin');
+Route::put('/librarian/resolve/{id}',[\App\Http\Controllers\LibrarianController::class,'resolve'])->name('librarian.resolve')->middleware('auth', 'isAdmin');
+Route::put('/librarian/startborrow/{id}',[\App\Http\Controllers\LibrarianController::class,'startborrow'])->name('librarian.borrow')->middleware('auth', 'isAdmin');
+Route::put('/reader/book/{id}', [\App\Http\Controllers\ReaderController::class,'book'])->name('reader.book')->middleware('auth');
 Route::get('/reader/booklist', [\App\Http\Controllers\ReaderController::class,'booklist'])->name('reader.booklist')->middleware('auth');
 
 Route::resource('reader', ReaderController::class)->middleware('auth');

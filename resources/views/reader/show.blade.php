@@ -55,7 +55,7 @@
         </div>
         <div class="w-25 p-3">
             @if (isset($book->user_id) == false)
-                <a href="{{ route('reader.edit', $book->id) }}" class="btn bg-maincolor text-white">Borrow</a>
+                <a href="{{ route('reader.book', $book->id) }}" class="btn bg-maincolor text-white"><i class="bi bi-journal-arrow-down"></i></a>
             @endif
         </div>
     </div>
