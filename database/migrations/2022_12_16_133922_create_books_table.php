@@ -21,7 +21,6 @@ return new class extends Migration
             $table->enum('status',['0','1','2','3'])->default('0')->comment('0 = Available, 1 = Borrowed, 2 = Due, 3 = Booked' );
             $table->string('author');
             $table->string('synopsis');
-            $table->string('year_published');
             $table->foreignId('user_id')->nullable()->constrained();
             $table->date('borrow_date')->nullable();
             $table->date('due_date')->nullable();

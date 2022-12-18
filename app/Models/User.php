@@ -3,14 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\ObjectInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\ObjectInterface;
 
 
-class User extends Authenticatable implements ObjectInterface
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 

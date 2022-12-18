@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\ObjectInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\ObjectInterface;
 
-class Book extends Model implements ObjectInterface
+class Book extends Model
 {
     use HasFactory;
 
