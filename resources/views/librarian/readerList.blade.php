@@ -25,12 +25,13 @@
         @foreach ($books as $book)
         <tr>
             <td scope="row">{{$book->name}} </td>
-            <td >{{$book->borrower()->get('name')}} </td>
+            <td >{{$book->borrower()->first()->name}} </td>
             <td >{{$book->borrow_date}} </td>
             <td>{{$book->due_date}} </td>
             <td>
                 <a class="btn bg-maincolor text-white" href="{{ route('borrow.edit',$book) }}" >Resolve</a>
-                <a class="btn btn-primary" href="{{ route('librarian.edit',array($book, $book->id)) }}">Edit</a>
+                <a class="btn btn-primary" href="{{ route('librarian.edit',array($book, $book->id)) }}"><i
+                    class="bi bi-pencil"></i></a>
             </td>
         </tr>
         @endforeach

@@ -18,8 +18,8 @@ class ReaderController extends Controller
     public function index()
     {
         $books = Book::all();
-  
-        return view('reader.index',compact('books'));
+
+        return view('reader.index', compact('books'));
     }
 
     /**
@@ -54,7 +54,7 @@ class ReaderController extends Controller
         $book = Book::find($id);
         return view('reader.show', compact('book'));
     }
-/**
+    /**
      * Performs static data change
      *
      * @param  int  $id
@@ -63,19 +63,21 @@ class ReaderController extends Controller
     public function edit($id)
     {
         $book = Book::find($id);
-        $book = Book::updateOrCreate([
-            'id' => $book->id,
-            'name' => $book->name, 
-        ],
+        $book = Book::updateOrCreate(
             [
-            'status' => '1',
-            'user_id' => Auth::user()->id, 
-            'borrow_date'=>Carbon::now()->format('Y-m-d'), 
-            'due_date'=>Carbon::now()->addDays(7)->format('Y-m-d')]
+                'id' => $book->id,
+                'name' => $book->name,
+            ],
+            [
+                'status' => '1',
+                'user_id' => Auth::user()->id,
+                'borrow_date' => Carbon::now()->format('Y-m-d'),
+                'due_date' => Carbon::now()->addDays(7)->format('Y-m-d')
+            ]
         );
 
         return redirect()->route('reader.index')
-                        ->with('success','Product updated successfully');
+            ->with('success', 'Product updated successfully');
     }
     /**
      * Remove the specified resource from storage.
@@ -92,8 +94,8 @@ class ReaderController extends Controller
     {
         $user = Auth::user();
         $books = $user->books();
-  
-        return view('reader.borrow',compact('books'));
+
+        return view('reader.borrow', compact('books'));
     }
 
     public function updateBook(Request $request, $id)
@@ -103,7 +105,7 @@ class ReaderController extends Controller
         //     ['user_id' => Auth::user()->id, 'borrow_date'=>Carbon\Carbon::now()->format('Y-m-d'), 'due_date'=>Carbon\Carbon::now()->addDays(7)->format('Y-m-d')]
         // );
 
-        
+
         // return redirect()->route('reader.index')
         //                 ->with('success','Product updated successfully');
     }
@@ -114,6 +116,6 @@ class ReaderController extends Controller
         $user = Auth::user();
         $books = $user->books()->get();
 
-        return view('reader.booklist',compact('books'));
+        return view('reader.booklist', compact('books'));
     }
 }

@@ -6,7 +6,8 @@
                 <h2> Show Book</h2>
             </div>
             <div class="pull-right">
-                <a class="btn bg-maincolor text-white" href="{{ route('librarian.index') }}"> Back</a>
+                <a class="btn bg-maincolor text-white" href="{{ route('librarian.index') }}"> <i class="bi bi-caret-left"></i>
+                </a>
             </div>
         </div>
     </div>

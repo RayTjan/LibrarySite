@@ -31,8 +31,8 @@ Route::put('/librarian/resolve/{id}',['as' =>'librarian', 'uses' => '\App\Http\C
 Route::get('/reader/booklist', [\App\Http\Controllers\ReaderController::class,'booklist'])->name('reader.booklist');
 
 Route::resource('reader', ReaderController::class);
-Route::resource('librarian', LibrarianController::class);
-Route::resource('borrow', BorrowController::class);
+Route::resource('librarian', LibrarianController::class)->middleware('auth');
+Route::resource('borrow', BorrowController::class)->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

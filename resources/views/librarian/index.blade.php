@@ -75,13 +75,16 @@
             <td>
                 <form action="{{ route('librarian.destroy',$book->id) }}" method="POST">
    
-                    <a class="btn btn-secondary" href="{{ route('librarian.show', $book->id) }}">Show</a>
-    
-                    <a class="btn btn-primary" href="{{ route('librarian.edit',$book->id) }}">Edit</a>
+                    <a class="btn btn-secondary" href="{{ route('librarian.show', $book->id) }}"><i class="bi bi-info-circle"></i>
+                    </a>
+                    
+                    <a class="btn btn-primary" href="{{ route('librarian.edit',$book->id) }}"><i class="bi bi-pencil"></i>
+                    </a>
    
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i>
+                    </button>
                 </form>
             </td>
         </tr>

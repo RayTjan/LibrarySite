@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\User;
+
 class BorrowController extends Controller
 {
     /**
@@ -58,19 +59,20 @@ class BorrowController extends Controller
     public function edit($id)
     {
         $book = Book::find($id);
-        $book = Book::updateOrCreate([
-            'id' => $book->id,
-            'name' => $book->name, 
-        ],
+        $book = Book::updateOrCreate(
             [
-            'status' => '0',
-            'user_id' => null, 
-            'borrow_date'=>null, 
-            'due_date'=>null,
+                'id' => $book->id,
+                'name' => $book->name,
+            ],
+            [
+                'status' => '0',
+                'user_id' => null,
+                'borrow_date' => null,
+                'due_date' => null,
             ]
         );
         return redirect()->route('librarian.borrowlist')
-                        ->with('success','Product updated successfully');
+            ->with('success', 'Product updated successfully');
     }
 
     /**
@@ -82,18 +84,19 @@ class BorrowController extends Controller
     public function destroy($id)
     {
         $book = Book::find($id);
-        $book = Book::updateOrCreate([
-            'id' => $book->id,
-            'name' => $book->name, 
-        ],
+        $book = Book::updateOrCreate(
             [
-            'status' => '0',
-            'user_id' => '', 
-            'borrow_date'=>'', 
-            'due_date'=>'',
+                'id' => $book->id,
+                'name' => $book->name,
+            ],
+            [
+                'status' => '0',
+                'user_id' => '',
+                'borrow_date' => '',
+                'due_date' => '',
             ]
         );
         return redirect()->route('librarian.index')
-                        ->with('success','Product updated successfully');
+            ->with('success', 'Product updated successfully');
     }
 }

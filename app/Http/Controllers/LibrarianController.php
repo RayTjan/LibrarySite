@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
@@ -13,22 +14,22 @@ class LibrarianController extends Controller
     public function index()
     {
         $books = Book::all();
-  
-        return view('librarian.index',compact('books'));
+
+        return view('librarian.index', compact('books'));
     }
 
     public function catalog()
     {
         $books = Book::all();
-  
-        return view('librarian.catalog',compact('books'));
+
+        return view('librarian.catalog', compact('books'));
     }
 
     public function borrowlist()
     {
-        $books = Book::whereIn('status', [2,3,4])->get();
+        $books = Book::whereIn('status', [2, 3, 4])->get();
 
-        return view('librarian.readerlist',compact('books'));
+        return view('librarian.readerlist', compact('books'));
     }
     /**
      * Show the form for creating a new resource.
@@ -39,7 +40,7 @@ class LibrarianController extends Controller
     {
         return view('librarian.create');
     }
-  
+
     /**
      * Store a newly created resource in storage.
      *
@@ -48,28 +49,28 @@ class LibrarianController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'name' => 'required',
             'genre' => 'required',
             'author' => 'required',
-            'image'=>'|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'image' => '|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'synopsis' => 'required',
             'year_published' => 'required',
         ]);
 
-        
+
         if ($request->hasFile('image')) {
             $request['image'] = $request->file('image')->store('gallery');
 
         }
-        
+
         Book::create($request->all());
-   
+
         return redirect()->route('librarian.index')
-                        ->with('success','Book created successfully.');
+            ->with('success', 'Book created successfully.');
     }
-   
+
     /**
      * Display the specified resource.
      *
@@ -81,7 +82,7 @@ class LibrarianController extends Controller
         $book = Book::find($id);
         return view('librarian.show', compact('book'));
     }
-   
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -91,9 +92,9 @@ class LibrarianController extends Controller
     public function edit($id)
     {
         $book = Book::find($id);
-        return view('librarian.edit',compact('book'));
+        return view('librarian.edit', compact('book'));
     }
-  
+
     /**
      * Update the specified resource in storage.
      *
@@ -109,7 +110,7 @@ class LibrarianController extends Controller
             'author' => 'required',
             'status' => 'required',
             'synopsis' => 'required',
-            'image'=>'image|file|max:5000',
+            'image' => 'image|file|max:5000',
             'year_published' => 'required',
         ]);
 
@@ -117,11 +118,11 @@ class LibrarianController extends Controller
             $request['image'] = $request->file('image')->store('gallery');
         }
         $res = Book::find($id)->update($request->all());
-  
+
         return redirect()->route('librarian.index')
-                        ->with('success','Product updated successfully');
+            ->with('success', 'Product updated successfully');
     }
-  
+
     /**
      * Remove the specified resource from storage.
      *
@@ -130,26 +131,27 @@ class LibrarianController extends Controller
      */
     public function destroy($id)
     {
-        $res=Book::find($id)->delete();
+        $res = Book::find($id)->delete();
 
-        return redirect()->route('librarian.index')->with('success','Product updated successfully');
-        
+        return redirect()->route('librarian.index')->with('success', 'Product updated successfully');
+
     }
 
     public function resolve(Book $book, $id)
     {
-        $book = Book::updateOrCreate([
-            'id' => $book->id,
-            'name' => $book->name, 
-        ],
+        $book = Book::updateOrCreate(
             [
-            'status' => '0',
-            'user_id' => '', 
-            'borrow_date'=>'', 
-            'due_date'=>'',
+                'id' => $book->id,
+                'name' => $book->name,
+            ],
+            [
+                'status' => '0',
+                'user_id' => '',
+                'borrow_date' => '',
+                'due_date' => '',
             ]
         );
         return redirect()->route('librarian.index')
-                        ->with('success','Product updated successfully');
+            ->with('success', 'Product updated successfully');
     }
 }
