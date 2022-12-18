@@ -20,4 +20,9 @@ class Comic extends Model
         'borrow_date',
         'due_date',
     ];
+
+    public function publishers()
+    {
+        return $this->morphMany(Published::class, 'publishedable');
+    }
 }

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('publisheds', function (Blueprint $table) {
             $table->id();
-            $table->integer('published_id');
-            $table->string('published_type');
+            $table->integer('publishedable_id');
+            $table->string('publishedable_type');
             $table->string('year_published');
             $table->string('author');
             $table->timestamps();

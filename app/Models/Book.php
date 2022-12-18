@@ -42,4 +42,11 @@ class Book extends Model implements ObjectInterface
 	public function getrelationshipdata() {
         return $this->belongsTo(User::class, 'user_id','id');
 	}
+
+    public function publishers()
+    {
+        return $this->morphMany(Published::class, 'publishedable');
+    }
+
+    
 }

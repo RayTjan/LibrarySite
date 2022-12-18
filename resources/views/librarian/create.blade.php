@@ -9,7 +9,7 @@
             <h2>Add Book</h2>
         </div>
         <div class="pull-right">
-            <a class="btn bg-maincolor text-white" href="{{ route('librarian.index') }}"> Back</a>
+            <a class="btn bg-maincolor text-white" href="{{ route('book.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -25,7 +25,7 @@
     </div>
 @endif
    
-<form action="{{ route('librarian.store') }}" method="POST" enctype='multipart/form-data' >
+<form action="{{ route('book.store') }}" method="POST" enctype='multipart/form-data' >
     @csrf
   
      <div class="row">

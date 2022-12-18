@@ -18,7 +18,7 @@ class EmailVerificationPromptController extends Controller
     public function __invoke(Request $request)
     {
         return $request->user()->hasVerifiedEmail()
-                    ? Auth::user()->id == '0' ? redirect()->route('librarian.index') : redirect()->route('librarian.index')
+                    ? redirect()->route('book.index')
                     : view('auth.verify-email');
     }
 }

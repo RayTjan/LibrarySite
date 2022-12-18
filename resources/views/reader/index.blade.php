@@ -23,7 +23,7 @@
             @foreach ($books as $book)
                 <div class="col-md-4 mb-3">
                     <div class="card">
-
+                    <!--Having some trouble with image, despite following tutorial and it already saved in public, its saved as private and tmp (yes I did the storage link in terminal)-->
                         @if ($book->image)
                             <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}" class="img-fluid">
                         @else
@@ -32,11 +32,11 @@
                         @endif
 
                         <div class="card-body">
-                            <h5 class="card-title">{{ $book->name }}</h5>
-                            <p>{{ $book->author }}
+                            <h5 class="card-title"><strong>{{ $book->name }}</strong></h5>
+                            <p>{{$book->publishers->first()->year_published}}</p>
+                            <p>By {{ $book->publishers->first()->author }}
 
                                 <small class="text-muted">
-                                    {{-- <br>Availability: {{ $post->status }}</a> --}}
                                     @switch($book->status)
                                         @case(0)
                                             <br>AVAILABLE

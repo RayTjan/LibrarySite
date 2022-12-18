@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Models\Published;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\StoreLiteratureRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Routing\Controller;
 
-
-class LibrarianController extends Controller
-{    /**
+class BookController extends Controller
+{
+ /**
     * Shows list of all books in a more compact way for admin actions
     */
     public function index()
@@ -78,15 +80,19 @@ class LibrarianController extends Controller
             'year_published' => 'required',
         ]);
 
-
+        // Failed, same code as tutorial, same save spot at public, but somehow saved as private/temp in database
         if ($request->hasFile('image')) {
             $request['image'] = $request->file('image')->store('gallery');
 
         }
+        $filtered = $request->except(['author', 'year_published']);
+        $book = Book::create($filtered);
+        $published = new Published();
+        $published->author = $request['author'];
+        $published->year_published = $request['year_published'];
+        $book->publishers()->save($published);	
 
-        Book::create($request->all());
-
-        return redirect()->route('librarian.index')
+        return redirect()->route('book.index')
             ->with('success', 'Book created successfully.');
     }
 
@@ -141,13 +147,29 @@ class LibrarianController extends Controller
             'image' => 'image|file|max:5000',
             'year_published' => 'required',
         ]);
+        // Failed, same code as tutorial, same save spot at public, but somehow saved as private/temp in database
 
         if ($request->hasFile('image')) {
             $request['image'] = $request->file('image')->store('gallery');
         }
-        
-        $res = Book::find($id)->update($request->all());
+
+        if($request['user_id'] == 'Select Reader'){
+            $filtered = $request->except(['author', 'year_published', 'user_id']);
+        }
+        else{
+            $filtered = $request->except(['author', 'year_published']);
+        }
+        $res = Book::find($id)->update($filtered);
         $book = Book::find($id);
+
+        foreach($book->publishers as $published){
+            //Tried to edit individually, but failed because lack of time. could make a form with expandable input for published
+            if($published->publishedable_id == $book->id){
+                $published->author = $request['author'];
+                $published->year_published = $request['year_published'];
+                $published->save();
+            }
+        }
         if(isset($request['user_id']) && $request['status'] == '1'){
             $book = Book::updateOrCreate(
                 [
@@ -172,7 +194,7 @@ class LibrarianController extends Controller
                 ]
             );
         }
-        return redirect()->route('librarian.index')
+        return redirect()->route('book.index')
             ->with('success', 'Product updated successfully');
     }
     /**
@@ -194,7 +216,7 @@ class LibrarianController extends Controller
             ]
         );
         // return $book;
-        return redirect()->route('librarian.index')
+        return redirect()->route('book.index')
             ->with('success', 'Product updated successfully');
     }
     /**
@@ -214,7 +236,7 @@ class LibrarianController extends Controller
             ]
         );
 
-        return redirect()->route('librarian.index')
+        return redirect()->route('book.index')
             ->with('success', 'Product updated successfully');
     }
     /**
@@ -226,9 +248,7 @@ class LibrarianController extends Controller
     public function destroy($id)
     {
         $res = Book::find($id)->delete();
-        return redirect()->route('librarian.index')->with('success', 'Product updated successfully');
+        return redirect()->route('book.index')->with('success', 'Product updated successfully');
 
     }
-
-
 }

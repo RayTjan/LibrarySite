@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StoreComicRequest;
+use App\Http\Requests\StoreLiteratureRequest;
 use App\Http\Requests\UpdateComicRequest;
 use App\Models\Comic;
+use Illuminate\Routing\Controller;
 
 class ComicController extends Controller
 {

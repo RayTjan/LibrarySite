@@ -40,7 +40,7 @@ class ConfirmablePasswordController extends Controller
         $request->session()->put('auth.password_confirmed_at', time());
 
         if (Auth::user()->id == 0){
-            return redirect()->route('librarian.index');
+            return redirect()->route('book.index');
         }
         else{
             return redirect()->route('reader.index');

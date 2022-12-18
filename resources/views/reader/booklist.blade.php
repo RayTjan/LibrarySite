@@ -24,15 +24,39 @@
             <th scope="col">Genre</th>
             <th scope="col">Author</th>
             <th scope="col">Year Published</th>
-            <th scope="col">Image</th>
+            <th scope="col">Borrow Date</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Action</th>
         </thead>
         @foreach ($books as $book)
             <tr>
                 <td scope="row">{{ $book->id }}</td>
                 <td>{{ $book->name }}</td>
+                <td>
+                    @switch($book->status)
+                        @case(0)
+                            AVAILABLE
+                        @break
+
+                        @case(1)
+                            BORROWED
+                        @break
+
+                        @case(2)
+                            DUE
+                        @break
+
+                        @case(3)
+                            BOOKED
+                        @break
+
+                        @default
+                            <br>Error, Try Again
+                    @endswitch
+                </td>
                 <td>{{ $book->genre }}</td>
-                <td>{{ $book->author }}</td>
-                <td>{{ $book->year_published }}</td>
+                <td>{{ $book->publishers->first()->author }}</td>
+                <td>{{ $book->publishers->first()->year_published }}</td>
                 <td>{{ $book->borrow_date }} </td>
                 <td>{{ $book->due_date }} </td>
                 <td>

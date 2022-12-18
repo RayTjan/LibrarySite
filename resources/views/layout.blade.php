@@ -34,10 +34,10 @@
                 <ul class="navbar-nav">
                     @if (Auth::user()->role == '0')
                         <li class="nav-item">
-                            <a class="nav-link" href="/librarian">Catalog</a>
+                            <a class="nav-link" href="/book">Catalog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/librarian/borrowlist">Readers</a>
+                            <a class="nav-link" href="/book/borrowlist">Readers</a>
                         </li>
                     @else
                         <li class="nav-item">

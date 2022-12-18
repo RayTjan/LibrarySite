@@ -11,9 +11,14 @@ class Published extends Model
 
     protected $fillable = [
         'id',
-        'published_id',
-        'published_type',
+        'publishedable_id',
+        'publishedable_type',
         'author',
         'year_published',
     ];
+
+    public function publishedable()
+    {
+        return $this->morphTo();
+    }
 }

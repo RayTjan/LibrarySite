@@ -9,16 +9,16 @@
                 <h2>Welcome to the Library</h2>
             </div>
             <div class="pull-right">
-                <a class="btn bg-maincolor text-white" href="{{ route('librarian.create') }}"> Create New Product</a>
+                <a class="btn bg-maincolor text-white" href="{{ route('book.create') }}"> Create New Product</a>
             </div>
             <br>
             <div class="pull-left">
-                <a class="btn bg-maincolor text-white" href="{{ route('librarian.sortbooks') }}">Sort</a>
+                <a class="btn bg-maincolor text-white" href="{{ route('book.sortbooks') }}">Sort</a>
             </div>
         </div>
     </div>
 
-    @if ($message = Session::get('success'))ß
+    @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
@@ -65,10 +65,10 @@
                     </div>
                 </td>
                 <td>{{ $book->genre }}</td>
-                <td>{{ $book->author }}</td>
-                <td>{{ $book->year_published }}</td>
+                <td>{{ $book->publishers->first()->author }}</td>
+                <td>{{ $book->publishers->first()->year_published }}</td>
                 <td>
-                    <!--Having some trouble with image, despite following tutorial and it already saved in public-->
+                    <!--Having some trouble with image, despite following tutorial and it already saved in public, its saved as private and tmp (yes I did the storage link in terminal)-->
                     @if (isset($book->image))
                         <div style="max-height: 400px; overflow:hidden;">
                             <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}" class="img-fluid">
@@ -79,13 +79,13 @@
                     @endif
                 </td>
                 <td>
-                    <form action="{{ route('librarian.destroy', $book->id) }}" method="POST">
+                    <form action="{{ route('book.destroy', $book->id) }}" method="POST">
                         <!--Show book details-->
-                        <a class="btn btn-secondary" href="{{ route('librarian.show', $book->id) }}"><i
+                        <a class="btn btn-secondary" href="{{ route('book.show', $book->id) }}"><i
                                 class="bi bi-info-circle"></i>
                         </a>
                         <!--Edit book information-->
-                        <a class="btn btn-primary" href="{{ route('librarian.edit', $book->id) }}"><i
+                        <a class="btn btn-primary" href="{{ route('book.edit', $book->id) }}"><i
                                 class="bi bi-pencil"></i>
                         </a>
                         @csrf

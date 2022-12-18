@@ -18,7 +18,7 @@ class EmailVerificationNotificationController extends Controller
     public function store(Request $request)
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->route('librarian.index');
+            return redirect()->route('book.index');
         }
 
         $request->user()->sendEmailVerificationNotification();

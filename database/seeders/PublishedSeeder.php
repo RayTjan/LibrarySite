@@ -16,58 +16,68 @@ class PublishedSeeder extends Seeder
     public function run()
     {
         $published = new Published();
-        $published->published_id = 1;
-        $published->published_type = 'App\Models\Book';
+        $published->publishedable_id = 1;
+        $published->publishedable_type = 'App\Models\Book';
+        $published->author = 'John Penguin';
+        $published->year_published = '2000';
+        $published->save();
+
+        $published = new Published();
+        $published->publishedable_id = 2;
+        $published->publishedable_type = 'App\Models\Book';
+        $published->author = 'Jane Magrave';
+        $published->year_published = '2050';
+        $published->save();
+
+        //to prove polymorphism
+        $published = new Published();
+        $published->publishedable_id = 1;
+        $published->publishedable_type = 'App\Models\Book';
+        $published->author = 'Marbles Sparkle';
+        $published->year_published = '2010';
+        $published->save();
+
+
+
+        $publisher = new Published();
+        $published->author = 'Mark Forge';
+        $published->publishedable_id = 3;
+        $published->publishedable_type = 'App\Models\Book';
+        $published->year_published = '2000';
+        $published->save();
+
+        $published = new Published();
+        $published->publishedable_id = 4;
+        $published->publishedable_type = 'App\Models\Book';
         $published->author = 'John Penguin';
         $published->year_published = '2000';
         $published->save();
 
         $published = new Published();
         $published->author = 'Jane Mangrave';
-        $published->published_id = 2;
-        $published->published_type = 'App\Models\Book';
+        $published->publishedable_id = 1;
+        $published->publishedable_type = 'App\Models\Comic';
         $published->year_published = '2000';
         $published->save();
 
         $publisher = new Published();
         $published->author = 'Mark Forge';
-        $published->published_id = 3;
-        $published->published_type = 'App\Models\Book';
+        $published->publishedable_id = 2;
+        $published->publishedable_type = 'App\Models\Comic';
         $published->year_published = '2000';
         $published->save();
 
         $published = new Published();
-        $published->published_id = 4;
-        $published->published_type = 'App\Models\Book';
+        $published->publishedable_id = 3;
+        $published->publishedable_type = 'App\Models\Book';
         $published->author = 'John Penguin';
         $published->year_published = '2000';
         $published->save();
 
         $published = new Published();
         $published->author = 'Jane Mangrave';
-        $published->published_id = 1;
-        $published->published_type = 'App\Models\Comic';
-        $published->year_published = '2000';
-        $published->save();
-
-        $publisher = new Published();
-        $published->author = 'Mark Forge';
-        $published->published_id = 2;
-        $published->published_type = 'App\Models\Comic';
-        $published->year_published = '2000';
-        $published->save();
-
-        $published = new Published();
-        $published->published_id = 3;
-        $published->published_type = 'App\Models\Book';
-        $published->author = 'John Penguin';
-        $published->year_published = '2000';
-        $published->save();
-
-        $published = new Published();
-        $published->author = 'Jane Mangrave';
-        $published->published_id = 4;
-        $published->published_type = 'App\Models\Comic';
+        $published->publishedable_id = 4;
+        $published->publishedable_type = 'App\Models\Comic';
         $published->year_published = '2000';
         $published->save();
 
