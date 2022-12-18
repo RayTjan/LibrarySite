@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Welcome to the Library</h2>
+                <h2>Book Catalog</h2>
             </div>
             <div class="pull-right">
                 <a class="btn bg-maincolor text-white" href="{{ route('book.create') }}"> Add New Book</a>
