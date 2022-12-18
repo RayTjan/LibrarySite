@@ -1,3 +1,5 @@
+<!-- Adds a new book-->
+
 @extends('layout')
   
 @section('content')

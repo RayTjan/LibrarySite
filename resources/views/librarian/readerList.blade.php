@@ -33,7 +33,7 @@
         @foreach ($books as $book)
         <tr>
             <td scope="row">{{$book->name}} </td>
-            <td >{{$book->borrower()->first()->name}} </td>
+            <td >{{$book->getrelationshipdata()->first()->name}} </td>
             <td>
                 <div class='d-inline'>
                     <p>

@@ -1,3 +1,5 @@
+<!-- Show deeper detail of book -->
+
 @extends('layout')
 @section('content')
     <div class="row">

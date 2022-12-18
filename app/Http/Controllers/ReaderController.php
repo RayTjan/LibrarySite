@@ -80,7 +80,7 @@ class ReaderController extends Controller
     public function borrowedBooks()
     {
         $user = Auth::user();
-        $books = $user->books();
+        $books = $user->getrelationshipdata();
 
         return view('reader.borrow', compact('books'));
     }
@@ -103,7 +103,7 @@ class ReaderController extends Controller
     {
 
         $user = Auth::user();
-        $books = $user->books()->get();
+        $books = $user->getrelationshipdata()->get();
 
         return view('reader.booklist', compact('books'));
     }
