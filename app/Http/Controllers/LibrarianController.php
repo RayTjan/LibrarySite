@@ -11,25 +11,43 @@ use Carbon\Carbon;
 
 
 class LibrarianController extends Controller
-{
+{    /**
+    * Shows list of all books in a more compact way for admin actions
+    */
     public function index()
     {
         $books = Book::all();
-
+        $quantity = count($books);
+        // return $quantity;
+        return view('librarian.index', compact('books'));
+    }
+    /**
+    * Sorts list of all books in a more compact way for admin actions
+    */
+    public function sortbooks()
+    {
+        $books = Book::all();
+        $books = $books->sortBy('name');
+        // return $books;
         return view('librarian.index', compact('books'));
     }
 
-    public function catalog()
-    {
-        $books = Book::all();
-
-        return view('librarian.catalog', compact('books'));
-    }
-
+    /**
+     * Shows list of books borrowed by a user
+     */
     public function borrowlist()
     {
         $books = Book::whereIn('status', [2, 3, 4])->get();
-
+        return view('librarian.readerlist', compact('books'));
+    }
+    /**
+     * Sorts the list of books borrowed by a user
+     */
+    public function sortduedates()
+    {
+        $books = Book::whereIn('status', [2, 3, 4])->get();
+        $books = $books->sortBy('due_date');
+        // return $books;
         return view('librarian.readerlist', compact('books'));
     }
     /**
@@ -80,8 +98,15 @@ class LibrarianController extends Controller
      */
     public function show($id)
     {
-        $book = Book::find($id);
-        return view('librarian.show', compact('book'));
+        if(is_string($id) == true){
+            $book = Book::find($id);
+            return view('librarian.show', compact('book'));
+        }
+        else{
+            $book = Book::find(1);
+            return view('librarian.show', compact('book'));
+        }
+        
     }
 
     /**
@@ -94,11 +119,12 @@ class LibrarianController extends Controller
     {
         $book = Book::find($id);
         $users = User::whereIn('role',['1'])->get();
+        // return $users;
         return view('librarian.edit', compact('book', 'users'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update Book resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Book  $book
@@ -134,9 +160,24 @@ class LibrarianController extends Controller
                 ]
             );
         }
+        if(isset($request['user_id']) && $request['status'] == '3'){
+            $book = Book::updateOrCreate(
+                [
+                    'id' => $book->id,
+                    'name' => $book->name,
+                ],
+                [
+                    'borrow_date' => null,
+                    'due_date' => null,
+                ]
+            );
+        }
         return redirect()->route('librarian.index')
             ->with('success', 'Product updated successfully');
     }
+    /**
+     * Erases a book booking/borrowing/due, return to avaialble state
+     */
     public function resolve(Request $request, $id)
     {
         $book = Book::find($id);
@@ -152,9 +193,13 @@ class LibrarianController extends Controller
                 'due_date' => null,
             ]
         );
+        // return $book;
         return redirect()->route('librarian.index')
             ->with('success', 'Product updated successfully');
     }
+    /**
+     * Moves Booking state to borrow state
+     */
     public function startborrow($id){
         $book = Book::find($id);
         $book = Book::updateOrCreate(
@@ -181,7 +226,6 @@ class LibrarianController extends Controller
     public function destroy($id)
     {
         $res = Book::find($id)->delete();
-
         return redirect()->route('librarian.index')->with('success', 'Product updated successfully');
 
     }

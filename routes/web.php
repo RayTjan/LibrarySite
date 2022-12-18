@@ -25,23 +25,23 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/librarian/catalog', [\App\Http\Controllers\LibrarianController::class,'catalog'])->name('librarian.catalog')->middleware('auth', 'isAdmin');
+//Unique Routes
+Route::get('/librarian/sortbooks', [\App\Http\Controllers\LibrarianController::class,'sortbooks'])->name('librarian.sortbooks')->middleware('auth', 'isAdmin');
+Route::get('/librarian/sortduedates', [\App\Http\Controllers\LibrarianController::class,'sortduedates'])->name('librarian.sortduedates')->middleware('auth', 'isAdmin');
 Route::get('/librarian/borrowlist', [\App\Http\Controllers\LibrarianController::class,'borrowlist'])->name('librarian.borrowlist')->middleware('auth', 'isAdmin');
 Route::put('/librarian/resolve/{id}',[\App\Http\Controllers\LibrarianController::class,'resolve'])->name('librarian.resolve')->middleware('auth', 'isAdmin');
 Route::put('/librarian/startborrow/{id}',[\App\Http\Controllers\LibrarianController::class,'startborrow'])->name('librarian.borrow')->middleware('auth', 'isAdmin');
 Route::put('/reader/book/{id}', [\App\Http\Controllers\ReaderController::class,'book'])->name('reader.book')->middleware('auth');
 Route::get('/reader/booklist', [\App\Http\Controllers\ReaderController::class,'booklist'])->name('reader.booklist')->middleware('auth');
 
-Route::resource('reader', ReaderController::class)->middleware('auth');
 
-
-
+//Auth Routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('librarian', LibrarianController::class)->middleware('isAdmin');
-    Route::resource('borrow', BorrowController::class)->middleware('isAdmin');
+    Route::resource('reader', ReaderController::class);
 });
 
 require __DIR__.'/auth.php';

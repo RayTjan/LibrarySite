@@ -11,7 +11,7 @@ use App\Http\Requests\UpdateBookRequest;
 class ReaderController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the book.
      *
      * @return \Illuminate\Http\Response
      */
@@ -74,7 +74,9 @@ class ReaderController extends Controller
     {
         //
     }
-
+    /**
+     * Shows list of books borrwed by this user
+     */
     public function borrowedBooks()
     {
         $user = Auth::user();
@@ -94,7 +96,9 @@ class ReaderController extends Controller
         // return redirect()->route('reader.index')
         //                 ->with('success','Product updated successfully');
     }
-
+    /**
+     * Shows list of books borrowed by a user
+     */
     public function bookList()
     {
 
@@ -103,7 +107,9 @@ class ReaderController extends Controller
 
         return view('reader.booklist', compact('books'));
     }
-
+    /**
+     * booking a book. It's a verb not noun. kinda misleading
+     */
     public function book($id){
         $book = Book::find($id);
         $book = Book::updateOrCreate(

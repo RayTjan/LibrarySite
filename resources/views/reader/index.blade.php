@@ -1,5 +1,6 @@
+<!-- Show list of books allowing user to view deeper or book -->
+
 @extends('layout')
- 
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -8,10 +9,10 @@
                 <br>
                 <br>
             </div>
-            
+
         </div>
     </div>
-   
+
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
@@ -26,8 +27,8 @@
                         @if ($book->image)
                             <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}" class="img-fluid">
                         @else
-                            <img src="https://source.unsplash.com/random/500x400?book"
-                                class="card-img-top" alt="{{ $book->name }}">
+                            <img src="https://source.unsplash.com/random/500x400?book" class="card-img-top"
+                                alt="{{ $book->name }}">
                         @endif
 
                         <div class="card-body">
@@ -65,27 +66,29 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <a href="{{ route('reader.show', $book->id)  }}" class="btn bg-maincolor text-white">
+                                        <a href="{{ route('reader.show', $book->id) }}" class="btn bg-maincolor text-white">
                                             Read more
                                         </a>
                                     </td>
-                                    
-                                        @if(isset($book->user_id) == false)
+
+                                    @if (isset($book->user_id) == false)
                                         <td>
-                                            <form action="{{ route('reader.book',$book->id) }}" method="POST" enctype='multipart/form-data'>
+                                            <form action="{{ route('reader.book', $book->id) }}" method="POST"
+                                                enctype='multipart/form-data'>
                                                 @method('PUT')
                                                 @csrf
-                                                <input name="id" type="hidden" value={{$book->id}}>
-                                                <button type="submit" class="btn bg-maincolor text-white"><i class="bi bi-journal-arrow-down"></i>
+                                                <input name="id" type="hidden" value={{ $book->id }}>
+                                                <button type="submit" class="btn bg-maincolor text-white"><i
+                                                        class="bi bi-journal-arrow-down"></i>
                                                 </button>
-                                            </form> 
-                                        </td>                           
-                                        @endif
-                                    
+                                            </form>
+                                        </td>
+                                    @endif
+
                                 </tr>
                             </table>
-                            
-                            
+
+
 
                         </div>
                     </div>

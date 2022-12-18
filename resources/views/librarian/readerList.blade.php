@@ -1,3 +1,6 @@
+<!-- Show list of users that has borrowed/due/booked a book -->
+
+
 @extends('layout')
  
 @section('content')
@@ -7,6 +10,10 @@
                 <h2>List of Borrowed Books</h2>
             </div>
         </div>
+        <br>
+            <div class="pull-left">
+                <a class="btn bg-maincolor text-white" href="{{ route('librarian.sortduedates') }}">Sort</a>
+            </div>
     </div>
    
     @if ($message = Session::get('success'))
@@ -57,6 +64,7 @@
             <td>{{$book->due_date}} </td>
                 @if ($book->status == 3)
                 <td>
+                <!--Makes book into borrowed and adds Borrow and due date-->
                 <form action="{{ route('librarian.borrow',$book->id) }}" method="POST" enctype='multipart/form-data'>
                         @method('PUT')
                         @csrf
@@ -66,12 +74,13 @@
                 </form>
                 </td>
                 @endif
-                {{-- <a class="btn bg-maincolor text-white" href="{{ route('librarian.resolve',$book) }}" >Resolve</a> --}}
                 <td>
-                <a class="btn btn-primary" href="{{ route('librarian.edit',array($book, $book->id)) }}"><i
+                <!--Edit book information-->
+                <a class="btn bg-maincolor text-white" href="{{ route('librarian.edit',array($book, $book->id)) }}"><i
                     class="bi bi-pencil"></i></a>
                 </td>
                 <td>
+                    <!--erases any trace of user booking/borrow-->
                     <form action="{{ route('librarian.resolve',$book->id) }}" method="POST" enctype='multipart/form-data'>
                             @method('PUT')
                             @csrf
