@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pusblisheds', function (Blueprint $table) {
+        Schema::create('publisheds', function (Blueprint $table) {
             $table->id();
             $table->integer('published_id');
-            $table->integer('published_type');
+            $table->string('published_type');
             $table->string('year_published');
             $table->string('author');
             $table->timestamps();

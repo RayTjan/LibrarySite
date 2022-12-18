@@ -18,7 +18,6 @@ class Book extends Model implements ObjectInterface
         'status',
         'genre',
         'synopsis',
-        'year_published',
         'user_id',
         'borrow_date',
         'due_date',
