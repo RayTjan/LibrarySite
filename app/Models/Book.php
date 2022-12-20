@@ -23,6 +23,7 @@ class Book extends Model implements ObjectInterface
     ];
 	/**
 	 * @return mixed
+     * return all books
 	 */
 	public function getAll() {
         return Book::all();
@@ -30,6 +31,7 @@ class Book extends Model implements ObjectInterface
 	
 	/**
 	 * @return mixed
+     * return book name
 	 */
 	public function getName($id) {
         return Book::find($id)->name;
@@ -37,11 +39,16 @@ class Book extends Model implements ObjectInterface
 	
 	/**
 	 * @return mixed
+     * return user
 	 */
 	public function getrelationshipdata() {
         return $this->belongsTo(User::class, 'user_id','id');
 	}
 
+    /**
+	 * @return mixed
+     * return author and year published
+	 */
     public function publishers()
     {
         return $this->morphMany(Published::class, 'publishedable');

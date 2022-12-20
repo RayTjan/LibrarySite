@@ -27,23 +27,23 @@ class UserSeeder extends Seeder
         $user->save();
         
         $user = new User();
-        $user->name= "user1";
+        $user->name= "Ray Ray";
         $user->role = '1';
         $user->email = 'user1@gmail.com';
         $user->password = Hash::make('something');
         $user->save();
 
         $user = new User();
-        $user->name= "user2";
+        $user->name= "John Doe";
         $user->role = '1';
-        $user->email = 'user2@gmail.com';
+        $user->email = 'johndoe@gmail.com';
         $user->password = Hash::make('something');
         $user->save();
 
         $user = new User();
-        $user->name= "user3";
+        $user->name= "Jane Smith";
         $user->role = '1';
-        $user->email = 'user3@gmail.com';
+        $user->email = 'Jane Smith@gmail.com';
         $user->password = Hash::make('something');
         $user->save();
         

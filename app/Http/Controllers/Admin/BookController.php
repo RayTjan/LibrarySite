@@ -21,6 +21,7 @@ class BookController extends Controller
         $books = Book::all();
         $quantity = count($books);
         // return $quantity;
+        //dd($quantity)
         return view('librarian.index', compact('books'));
     }
     /**
@@ -81,7 +82,6 @@ class BookController extends Controller
         // Failed, same code as tutorial, same save spot at public, but somehow saved as private/temp in database
         if ($request->hasFile('image')) {
             $request['image'] = $request->file('image')->store('gallery');
-
         }
         $filtered = $request->except(['author', 'year_published']);
         $book = Book::create($filtered);
@@ -190,7 +190,7 @@ class BookController extends Controller
             );
         }
         return redirect()->route('book.index')
-            ->with('success', 'Product updated successfully');
+            ->with('success', 'Book updated successfully');
     }
     /**
      * Erases a book booking/borrowing/due, return to avaialble state
@@ -211,8 +211,8 @@ class BookController extends Controller
             ]
         );
         // return $book;
-        return redirect()->route('book.index')
-            ->with('success', 'Product updated successfully');
+        return redirect()->route('book.borrowlist')
+            ->with('success', 'Book updated successfully');
     }
     /**
      * Moves Booking state to borrow state
@@ -231,8 +231,8 @@ class BookController extends Controller
             ]
         );
 
-        return redirect()->route('book.index')
-            ->with('success', 'Product updated successfully');
+        return redirect()->route('book.borrowlist')
+            ->with('success', 'Book updated successfully');
     }
     /**
      * Remove the specified resource from storage.
@@ -243,7 +243,7 @@ class BookController extends Controller
     public function destroy($id)
     {
         $res = Book::find($id)->delete();
-        return redirect()->route('book.index')->with('success', 'Product updated successfully');
+        return redirect()->route('book.index')->with('success', 'Book updated successfully');
 
     }
 }

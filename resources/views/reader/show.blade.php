@@ -24,37 +24,26 @@
     </div>
     <div class="row">
         <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="form-group">
                 <strong>Name: {{ $book->name }}</strong>
-                {{ $book->name }}
-            </div>
+        </div>
+        <br>
+        <br>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+                <p>Genre: {{ $book->genre }}</p>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <p>Genre:</p>
-                <p>
-                    {{ $book->genre }}
-                </p>
-            </div>
+                <p>Year Published:  {{ $book->publishers->first()->year_published }}</p>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <p>Year Published:</p>
-                {{ $book->publishers->first()->year_published }}
-            </div>
+                <p>Author: {{ $book->publishers->first()->author }}</p>
+                
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <p>Author:</p>
-                {{ $book->publishers->first()->author }}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
                 <p>Synopsis:</p>
                 {{ $book->synopsis }}
-            </div>
         </div>
+        <br>
+        <br>
         <div class="w-25 p-3">
             @if (isset($book->user_id) == false)
                 <a href="{{ route('reader.book', $book->id) }}" class="btn bg-maincolor text-white"><i

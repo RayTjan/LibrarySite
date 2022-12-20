@@ -70,8 +70,8 @@
                                             Read more
                                         </a>
                                     </td>
-
-                                    @if (isset($book->user_id) == false)
+                                    {{-- Recently added a condition so admin can;t book a book --}}
+                                    @if (isset($book->user_id) == false && Auth::user()->role == '1') 
                                         <td>
                                             <form action="{{ route('reader.book', $book->id) }}" method="POST"
                                                 enctype='multipart/form-data'>

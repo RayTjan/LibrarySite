@@ -93,8 +93,7 @@ class ReaderController extends Controller
         // );
 
 
-        // return redirect()->route('reader.index')
-        //                 ->with('success','Product updated successfully');
+        // return redirect()->route('reader.index');
     }
     /**
      * Shows list of books borrowed by a user
@@ -124,6 +123,6 @@ class ReaderController extends Controller
         );
 
         return redirect()->route('reader.index')
-            ->with('success', 'Product updated successfully');
+            ->with('success', 'Book is booked');
     }
 }

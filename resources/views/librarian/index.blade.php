@@ -75,7 +75,7 @@
                             <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}" class="img-fluid">
                         </div>
                     @else
-                        <img src="https://source.unsplash.com/random/250x350?book" class="card-img-top"
+                        <img src="https://source.unsplash.com/random/70x100?book" class="card-img-top"
                             alt="{{ $book->name }}">
                     @endif
                 </td>

@@ -49,6 +49,7 @@ class User extends Authenticatable implements ObjectInterface
 
 	/**
 	 * @return mixed
+     * get all user
 	 */
 	public function getAll() {
         return User::all();
@@ -56,6 +57,7 @@ class User extends Authenticatable implements ObjectInterface
 	
 	/**
 	 * @return mixed
+     * get user name
 	 */
 	public function getName($id) {
         return User::find($id)->name;
@@ -63,6 +65,7 @@ class User extends Authenticatable implements ObjectInterface
 	
 	/**
 	 * @return mixed
+     * get books borrowed by user
 	 */
 	public function getrelationshipdata() {
         return $this->hasMany(Book::class, 'user_id', 'id');
